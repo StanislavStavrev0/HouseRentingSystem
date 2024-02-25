@@ -22,97 +22,6 @@ namespace HouseRentingSystem.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Models.Agent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Agents", (string)null);
-                });
-
-            modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories", (string)null);
-                });
-
-            modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Models.House", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<int>("AgentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("PricePerMonth")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("RenterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AgentId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Houses", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -315,36 +224,6 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Models.Agent", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Models.House", b =>
-                {
-                    b.HasOne("HouseRentingSystem.Infrastructure.Data.Models.Agent", "Agent")
-                        .WithMany()
-                        .HasForeignKey("AgentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HouseRentingSystem.Infrastructure.Data.Models.Category", "Category")
-                        .WithMany("Houses")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Agent");
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -394,11 +273,6 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Models.Category", b =>
-                {
-                    b.Navigation("Houses");
                 });
 #pragma warning restore 612, 618
         }

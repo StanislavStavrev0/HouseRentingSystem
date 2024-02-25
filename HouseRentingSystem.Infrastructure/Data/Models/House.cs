@@ -37,13 +37,13 @@ namespace HouseRentingSystem.Infrastructure.Data.Models
         [Required]
         public int CategoryId { get; set; }
 
-        [ForeignKey(nameof(CategoryId))]
+       
         public Category Category { get; set; } = null!;
 
         [Required]
         public int AgentId { get; set; }
 
-        [ForeignKey(nameof(AgentId))]
+       
         public Agent Agent { get; set; } = null!;
 
         public string RenterId { get; set; } = string.Empty;
