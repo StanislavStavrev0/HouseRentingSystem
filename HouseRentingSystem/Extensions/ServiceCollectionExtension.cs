@@ -1,29 +1,37 @@
-﻿using HouseRentingSystem.Infrastructure.Data;
+﻿using HouseRentingSystem.Core.Contracts.House;
+using HouseRentingSystem.Core.Services.House;
+using HouseRentingSystem.Infrastructure.Data;
+using HouseRentingSystem.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
-{
+{                                           //INVERTION OF CONTROLL CONTAINER
     public static class ServiceCollectionExtension
-    {
+    {  
+        // ADDING SERVICES
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IHouseService, HouseService>();
             return services;
         }
 
-
+        // ADDING DB CONTEXTS
         public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
         {
             var connectionString = config.GetConnectionString("DefaultConnection");
             services.AddDbContext<HouseRentingDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            services.AddScoped<IRepository, Repository>();
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             return services;
         }
 
-        public static IServiceCollection AddApplicationIdenity(this IServiceCollection services, IConfiguration config)
+        // ADDING / MANIPULATING THE IDENTITY 
+        public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
             services.AddDefaultIdentity<IdentityUser>(options =>
             {
