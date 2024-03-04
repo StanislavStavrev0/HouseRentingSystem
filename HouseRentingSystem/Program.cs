@@ -3,7 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationDbContext(builder.Configuration); // our method
 
-builder.Services.AddApplicationIdenity(builder.Configuration); // our method
+builder.Services.AddApplicationIdentity(builder.Configuration); // our method
 
 builder.Services.AddControllersWithViews();
 
