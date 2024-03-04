@@ -1,4 +1,4 @@
-﻿using HouseRentingSystem.Core.Contracts.House;
+﻿using HouseRentingSystem.Core.Contracts;
 using HouseRentingSystem.Core.ViewModels.Home;
 using HouseRentingSystem.Models;
 using Microsoft.AspNetCore.Mvc;
