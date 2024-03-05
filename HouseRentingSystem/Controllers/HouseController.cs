@@ -4,8 +4,8 @@ using HouseRentingSystem.Core.ViewModels.House;
 
 namespace HouseRentingSystem.Controllers
 {
-    [Authorize]
-    public class HouseController : Controller
+   
+    public class HouseController : BaseController
     {
         [AllowAnonymous]
         public async Task<IActionResult> All()
