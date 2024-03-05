@@ -19,9 +19,15 @@ namespace HouseRentingSystem.Core.Services
             _data = data;
         }
 
-        public Task<bool> CreateAsync(string userId, string phoneNumber)
+        public async Task CreateAsync(string userId, string phoneNumber)
         {
-            throw new NotImplementedException();
+            await _data.AddAsync(new Agent()
+            {
+                UserId = userId,
+                PhoneNumber = phoneNumber
+            });
+
+            await _data.SaveChangeAsync();
         }
 
         public async Task<bool> ExistsByIdAsync(string userId)
@@ -30,14 +36,16 @@ namespace HouseRentingSystem.Core.Services
                 .AnyAsync(a => a.UserId == userId);
         }
 
-        public Task<bool> UserHasRentsAsync(string userId)
+        public async Task<bool> UserHasRentsAsync(string userId)
         {
-            throw new NotImplementedException();
+            return await _data.AllReadOnly<Infrastructure.Data.Models.House>()
+                  .AnyAsync(h => h.RenterId == userId);
         }
 
-        public Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
+        public async Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
         {
-            throw new NotImplementedException();
+            return await _data.AllReadOnly<Agent>()
+                .AnyAsync(a => a.PhoneNumber == phoneNumber);
         }
     }
 }
