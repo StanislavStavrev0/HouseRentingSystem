@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HouseRentingSystem.Infrastructure.Data.Models
 {
+    [Index(nameof(PhoneNumber), IsUnique = true)] //this will put unique constraints in the DB table generation
     public class Agent
     {
         [Key]
