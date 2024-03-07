@@ -13,8 +13,8 @@ namespace HouseRentingSystem.Core.Services
     public class AgentService : IAgentService
     {
         //implementing the Repository (copy of the DB) to take/use data from it
-        private readonly Repository _data;
-        public AgentService(Repository data)
+        private readonly IRepository _data;
+        public AgentService(IRepository data)
         {
             _data = data;
         }

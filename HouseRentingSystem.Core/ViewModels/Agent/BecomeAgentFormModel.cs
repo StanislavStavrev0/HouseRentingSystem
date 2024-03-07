@@ -7,10 +7,10 @@ namespace HouseRentingSystem.Core.ViewModels.Agent
 {
     public class BecomeAgentFormModel
     {
-        [Required(ErrorMessage = RequiredMessage)]
-        [StringLength(PhoneNumberMaxLength,
-            MinimumLength = PhoneNumberMinLength,
-            ErrorMessage = LengthMessage)]
+        //[Required(ErrorMessage = RequiredMessage)]
+        //[StringLength(PhoneNumberMaxLength,
+        //    MinimumLength = PhoneNumberMinLength,
+        //    ErrorMessage = LengthMessage)]
         [Display(Name = "Phone Number")]
         [Phone()]
         public string PhoneNumber { get; set; } = null!;
