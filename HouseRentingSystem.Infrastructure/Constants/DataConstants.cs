@@ -16,6 +16,7 @@
 
         public const string PricePerMonthMaxLength = "2000.00";
         public const string PricePerMonthMinLength = "0.00";
+        public const string PricePerMonthErrorMessage = "Price Per Month must be a positive number ad less {2} leva.";
 
         public const int PhoneNumberMaxLength = 15;
         public const int PhoneNumberMinLength = 7;

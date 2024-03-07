@@ -13,38 +13,45 @@ namespace HouseRentingSystem.Core.Services
     public class AgentService : IAgentService
     {
         //implementing the Repository (copy of the DB) to take/use data from it
-        private readonly IRepository _data;
-        public AgentService(IRepository data)
+        private readonly IRepository data;
+        public AgentService(IRepository _data)
         {
-            _data = data;
+            data = _data;
         }
 
         public async Task CreateAsync(string userId, string phoneNumber)
         {
-            await _data.AddAsync(new Agent()
+            await data.AddAsync(new Agent()
             {
                 UserId = userId,
                 PhoneNumber = phoneNumber
             });
 
-            await _data.SaveChangeAsync();
+            await data.SaveChangeAsync();
         }
 
         public async Task<bool> ExistsByIdAsync(string userId)
         {
-            return await _data.AllReadOnly<Agent>()
+            return await data.AllReadOnly<Agent>()
                 .AnyAsync(a => a.UserId == userId);
+        }
+
+        public async Task<int?> GetAgentIdAsync(string userId)
+        {
+            return (await data.AllReadOnly<Agent>()
+                .FirstOrDefaultAsync(a => a.UserId == userId))?.Id;
+
         }
 
         public async Task<bool> UserHasRentsAsync(string userId)
         {
-            return await _data.AllReadOnly<Infrastructure.Data.Models.House>()
+            return await data.AllReadOnly<Infrastructure.Data.Models.House>()
                   .AnyAsync(h => h.RenterId == userId);
         }
 
         public async Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber)
         {
-            return await _data.AllReadOnly<Agent>()
+            return await data.AllReadOnly<Agent>()
                 .AnyAsync(a => a.PhoneNumber == phoneNumber);
         }
     }
