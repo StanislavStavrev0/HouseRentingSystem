@@ -1,12 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using HouseRentingSystem.Core.ViewModels.House;
+using HouseRentingSystem.Core.Contracts;
 
 namespace HouseRentingSystem.Controllers
 {
-   
+
     public class HouseController : BaseController
     {
+        //implementing the service in the HOUSE CONTROLLER
+
+        private readonly IHouseService houseService;
+        public HouseController(IHouseService _houseService)
+        {
+            houseService = _houseService;
+        }
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {

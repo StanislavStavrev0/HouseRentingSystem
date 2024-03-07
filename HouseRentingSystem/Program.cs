@@ -1,11 +1,16 @@
 
+using HouseRentingSystem.ModelBinders;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationDbContext(builder.Configuration); // our method
 
 builder.Services.AddApplicationIdentity(builder.Configuration); // our method
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+});
 
 builder.Services.AddApplicationServices(); // our method
 

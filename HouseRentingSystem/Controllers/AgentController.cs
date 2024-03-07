@@ -34,7 +34,7 @@ namespace HouseRentingSystem.Controllers
         public async Task<IActionResult> Become(BecomeAgentFormModel model)
         {
 
-            if (await _agentService.UserWithPhoneNumberExistsAsync(User.Id())) { }
+            if (await _agentService.UserWithPhoneNumberExistsAsync(model.PhoneNumber)) { }
             {
                 ModelState.AddModelError(nameof(model.PhoneNumber), PhoneExists);
             }
